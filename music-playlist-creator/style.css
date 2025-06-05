@@ -52,6 +52,11 @@ h1 {
     margin-left: 20px;
 }
 
+.paragraph-notif {
+    text-align: center;
+    color: aliceblue;
+}
+
 footer {
     position: fixed;
     width: 100vw;
