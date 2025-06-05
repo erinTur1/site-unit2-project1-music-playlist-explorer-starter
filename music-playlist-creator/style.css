@@ -2,33 +2,62 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f8f8f8;
+    /* background-color: #f8f8f8; */
+    background-color: #f79b9b;
 }
 
 
 header {
-    background-color: rgb(189, 188, 188);
-    padding: 20px;
+    /* background-color: rgb(189, 188, 188); */
+    background-color: #fe8282;
+    /* padding: 20px; */
     position: fixed;
     width: 100vw;
     z-index: 1;
-    /* opacity: 0.5; */
+    padding-right: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
-/* main {
-    opacity: 0.5;
-} */
+#header-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background-color: #fe8282;
+    overflow: hidden;
+}
+
+#header-nav li {
+    float: left;
+    height: 77px;
+    width: 70px;
+}
+
+#header-nav a {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    padding-top: 30px;
+    height: 77px;
+    width: 70px;
+}
+
+#header-nav a:hover {
+    background-color: #fc4747;
+}
 
 h1 {
-    margin: 0px;
+    margin-top: 20px;
+    margin-left: 20px;
 }
 
 footer {
     position: fixed;
     width: 100vw;
     bottom: 0;
-    background-color: rgb(36, 35, 35);
-    /* opacity: 0.5; */
+    /* background-color: rgb(189, 188, 188); */
+    background-color: #fe8282;
 }
 
 .playlist-cards {
@@ -41,6 +70,16 @@ footer {
 
 .modal-overlay {
     display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-popup {
+    display: none;
     z-index: 2;
     max-width: 70%;
     max-height: 400px;
@@ -51,13 +90,17 @@ footer {
     transform: translate(-50%, -50%);    
 }
 
-.modal-overlay * {
+.modal-popup * {
     opacity: 1;
+    
 }
 
 .modal-content {
-    background-color: #e4e0e0;
+    /* background-color: #e4e0e0; */
+    background-color: #f79b9b;
+    border-style: outset;
     border-radius: 5%;
+    border-width: 10px;
     max-height: 400px;
     overflow: scroll;
 }
@@ -74,7 +117,7 @@ footer {
     display: flex;
     flex-direction: column;
     padding: 20px;
-    max-height: 70%;
+    max-height: 80%;
     max-width: 100%;
 }
 
@@ -82,14 +125,14 @@ footer {
     display: flex;
     flex-direction: row;  
     max-width: 90%;
-    max-height: 10%;
+    max-height: 20%;
     border: grey solid 2px;
     margin-bottom: 4px;
 }
 
 .playlist-list p {
     margin-bottom: 2px;
-    font-size: 10px;
+    font-size: 15px;
 }
 
 .modal-content .playlist-img {
@@ -100,8 +143,8 @@ footer {
 }
 
 .song-img {
-    max-height: 60px;
-    max-width: 70px;
+    max-height: 90px;
+    max-width: 100px;
     margin: 5px;
     border-radius: 5%;
 }
@@ -117,7 +160,13 @@ footer {
     width: 240px;
     border-style: outset;
     border-radius: 5%;
+    border-width: 10px;
     margin: 20px 20px;
+    background-color: #f8c76b;
+}
+
+.card:hover {
+    background-color: #f6b234;
 }
 
 .card * {
