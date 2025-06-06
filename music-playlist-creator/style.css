@@ -140,14 +140,14 @@ footer {
     font-size: 15px;
 }
 
-.modal-content .playlist-img {
+.playlist-info > img {
     max-height: 100%;
     max-width: 20%;
     margin: 5px;
     border-radius: 5%;
 }
 
-.song-img {
+.song-tile > img {
     max-height: 90px;
     max-width: 100px;
     margin: 5px;
