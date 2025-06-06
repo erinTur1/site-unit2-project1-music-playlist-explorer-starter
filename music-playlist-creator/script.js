@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector("title").innerText === "Music Playlist Explorer") {
         //If document is the home page (index.html)...
         loadPlaylists(); 
-        document.getElementById('add-songs-btn').addEventListener('click', handleAddSongs);
+        document.getElementById('add-songs-btn').addEventListener('click', handleAddSongs); //needed for adding playlist functionality
     } else {
         //If document is the featured page (index.html)...
         loadFeaturedContent();
@@ -161,6 +161,7 @@ function toggleLike(likeBtn) {
 
 }
 
+//removes playlist from data and reloads playlists
 function deletePlaylist(deleteBtn) {
     const playlistId = deleteBtn.getAttribute("data-id");
     currPlaylistId = playlistId;
@@ -171,11 +172,12 @@ function deletePlaylist(deleteBtn) {
     loadPlaylists();
 }
 
+//called when 'edit' button is clicked. 
 function editPlaylist(editBtn) {
     const playlistId = editBtn.getAttribute("data-id");
     currPlaylistId = playlistId;
     obtainPlaylistInfo()
-    displayEditModal();
+    displayEditModal(); //new modal display with edit feature will show
 }
 
 
@@ -200,6 +202,8 @@ function displayEditModal() {
     document.getElementById('edit-form').addEventListener('submit', handleEditSubmit);
     createSongsList();
 
+    //I ran out of time to be able to delete or edit songs - so the edit stretch featur only includes playlist name and author
+
 }
 
 function handleEditSubmit(event) {
@@ -214,11 +218,12 @@ function handleEditSubmit(event) {
     };
 
     const indexEdit = playlistData.findIndex((playlist) => playlist.playlistID == currPlaylistId);
-    playlistData[indexEdit] = currPlaylist;
-    loadPlaylists();
+    playlistData[indexEdit] = currPlaylist; //update playlist in data file
+    loadPlaylists(); //reload
     hideModal();
 }
 
+//submits entire form - even dynamically loaded parts
 function handleAddSubmitAll(event) {
     event.preventDefault();
     const name = document.getElementById('new-name').value;
@@ -227,6 +232,7 @@ function handleAddSubmitAll(event) {
     img = "\""+ document.getElementById('new-img').value +"\"";
 	const author = document.getElementById('new-author').value;
 
+    //create array of songs with objects just consisting of title and artist
     let songs = [];
     for(let i = 1; i <= numSongs; i++) {
         songs.push( {
@@ -235,6 +241,7 @@ function handleAddSubmitAll(event) {
         })
     }
 
+    //add new playlist to memory
     playlistData.push(
         {
             "playlistID": getNewId(),
@@ -255,11 +262,12 @@ function handleAddSubmitAll(event) {
         }
     );
 
-    document.getElementById('add-form').reset();
+    document.getElementById('add-form').reset(); //clear fields
+    document.getElementById('add-form').querySelector("div").remove(); //remove add songs fields
     loadPlaylists();
-    console.log(playlistData);
 }
 
+//called when 'add songs' button is pressed
 function handleAddSongs(event) {
     event.preventDefault();
     const numSongs = document.getElementById('num-songs').value;
@@ -268,9 +276,10 @@ function handleAddSongs(event) {
     document.getElementById('add-form').addEventListener('submit', handleAddSubmitAll);
 }
 
+//function taht actually dynamically changes the form element
 function addSongsForm(numSongs) {
     const addForm = document.getElementById('add-form');
-    const innerDiv = document.createElement("div");
+    const innerDiv = document.createElement("div"); //goes within the form element
     const br = document.createElement("br");
 
     for (let i = 1; i <= numSongs; i++) {
@@ -348,5 +357,7 @@ function getNewId() {
     //https://stackoverflow.com/questions/8012002/create-a-unique-number-with-javascript-time
     //"shortest way to create a very likely unique number"
     return Date.now() + Math.random();
+
+    //would definitely look into stronger methods to get unque ids if I had more time
 }
 
