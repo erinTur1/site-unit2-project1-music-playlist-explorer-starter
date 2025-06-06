@@ -4,18 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Music Playlist Explorer</title>
+    <title>Featured Playlist</title>
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     
     <link rel="stylesheet" href="style.css">
     
-    <!--For use of Font Awesome Icons-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <header>
         <!-- Your header content here -->
-         <h1>Music Playlist Explorer</h1>
+         <h1>Featured Playlist</h1>
          <nav id="header-nav">
             <ul>
                 <li><a href="./featured.html">Featured</a></li>
@@ -25,19 +23,15 @@
     </header>
 
     <main> 
-        <!-- Your main content here -->
-         <div class="playlist-cards">
-            <!--Playlist cards will be dynamically inserted here-->
-         </div>
-    </main>
-        <div class="modal-overlay">
-            <div class="modal-popup">
-                <div class="modal-content">
-                    <!--Modal content will be dynamically inserted here-->
-                </div>
-            </div>
-
+        <div class="featured-content">
+            <section class="playlist-label">
+                <img src="assets/img/playlist.png" alt="playlistimg"/>
+                <h3 >Playlist</h3>
+            </section>
+            <section class="playlist-list"></section>
         </div>
+        
+    </main>
 
     <footer>
         <!-- Your footer content here -->

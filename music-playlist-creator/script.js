@@ -1,6 +1,10 @@
-
 document.addEventListener('DOMContentLoaded', () => {
-    loadPlaylists();
+    if (document.querySelector("title").innerText === "Music Playlist Explorer") {
+        loadPlaylists();
+    } else {
+        console.log(playlistData);
+        loadFeaturedContent();
+    }
 });
 
 const modalOverlay = document.querySelector(".modal-overlay");
@@ -9,7 +13,6 @@ let currPlaylistId = null;
 let currPlaylist = null;
 
 function loadPlaylists() {
-    //load playlist objects from data.js
     const playlists = playlistData;
     const playlistCardsArea = document.querySelector(".playlist-cards");
     if (playlists.length == 0) {
@@ -59,34 +62,40 @@ function displayModal() {
                 <h3>${currPlaylist.playlist_name}</h3>
                 <p>${currPlaylist.playlist_author}</p>
             </section>
+            <button class="shuffle-btn" data-id="${currPlaylist.playlistID}">Shuffle</button>
         </div>
         <div class="playlist-list">
         </div>
     `
+    createSongsList();
+    // currPlaylist.songs.forEach( (song) => {
+    //         const songTile = createSongTile(song);
+    //         songTilesArea = document.querySelector(".playlist-list");
+    //         songTilesArea.appendChild(songTile);
+    // });
 
+}
+
+function createSongsList() {
     currPlaylist.songs.forEach( (song) => {
             const songTile = createSongTile(song);
             songTilesArea = document.querySelector(".playlist-list");
             songTilesArea.appendChild(songTile);
     });
-
 }
 
 function createSongTile(song) {
-    console.log(song);
     const newSongTile = document.createElement('div');
     newSongTile.className = "song-tile";
     // playlistCard.id = playlist.playlistID; 
     newSongTile.innerHTML = `
-        <div class="song-tile">
-            <img src=${song.cover_art} alt="image of ${song.title}"/>
-            <section>
-                <p class="song-title">${song.title}</p>
-                <p>${song.artist}</p>
-                <p>${song.album}</p>
-            </section>
-            <p class="song-length">${song.length}</p>
-        </div>
+        <img src=${song.cover_art} alt="image of ${song.title}"/>
+        <section>
+            <p class="song-title">${song.title}</p>
+            <p>${song.artist}</p>
+            <p>${song.album}</p>
+        </section>
+        <p class="song-length">${song.length}</p>
     `
     return newSongTile; 
 }
@@ -104,7 +113,6 @@ function toggleLike(likeBtn) {
 	const isLiked = likeBtn.getAttribute('data-liked') === 'true';
     obtainPlaylistInfo();
     let likesCount = currPlaylist.like_count;
-    console.log(likesCount);
 
     if (isLiked) {
 		likesCount -= 1;
@@ -114,7 +122,6 @@ function toggleLike(likeBtn) {
 		likeBtn.setAttribute('data-liked', 'false');
 	} else {
 		likesCount += 1;
-        console.log(likesCount);
         likeBtn.querySelector("i").classList.remove("fa-heart-o");
         likeBtn.querySelector("p").innerText = likesCount;
         currPlaylist.like_count = likesCount;
@@ -123,19 +130,60 @@ function toggleLike(likeBtn) {
 
 }
 
+function shuffleSongs(shuffleBtn) {
+    const playlistId = shuffleBtn.getAttribute("data-id");
+    currPlaylistId = playlistId;
+    obtainPlaylistInfo();
+    let songs = currPlaylist.songs;
 
+    //shuffle using the Fisher-Yates algorithm: (https://coureywong.medium.com/how-to-shuffle-an-array-of-items-in-javascript-39b9efe4b567)
+    let i = songs.length, j, temp;
+    while (--i > 0) {
+        j = Math.floor(Math.random() * (i + 1));
+        temp = songs[j];
+        songs[j] = songs[i];
+        songs[i] = temp;
+    }
+
+    currPlaylist.songs = songs;
+    displayModal();
+
+
+}
+
+
+
+//ALTERNATE METHOD: 
+//after playlists load, call new function, addAllEventlisteners
 
 window.addEventListener("click", function (event) {
     if (event.target.className === "card") {
         currPlaylistId = event.target.id;
-        console.log(currPlaylistId);
         obtainPlaylistInfo();
         displayModal();
     }  else if (event.target.className === "modal-overlay") {
         hideModal();
     } else if (event.target.className === "like-btn") {
         toggleLike(event.target);
+    } else if (event.target.className === "shuffle-btn") {
+        shuffleSongs(event.target);
     }
 });
 
+
+function loadFeaturedContent() {
+
+    const randIndex = Math.floor(Math.random() * playlistData.length);
+    
+    currPlaylist = playlistData[randIndex];
+    const leftSide = document.querySelector(".playlist-label");
+
+    leftSide.innerHTML = `
+        <img src="${currPlaylist.playlist_art}" alt="image of ${currPlaylist.playlist_author}'s ${currPlaylist.playlist_name}"/>
+        <h3>${currPlaylist.playlist_name}</h3>
+    `
+
+    createSongsList();
+
+}
 
