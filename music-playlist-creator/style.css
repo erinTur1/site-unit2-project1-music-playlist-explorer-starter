@@ -66,15 +66,15 @@ footer p {
 
 .playlist-cards {
     position: absolute;
-    top: 100px;
+    top: 200px;
     padding-bottom: 100px;
-    /* padding-top: 100px; */
+    margin-top: 100px;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-evenly;
 }
 
-/* .add-section {
+.add-section {
     pointer-events: auto;
     margin-left: 30px;
     position: absolute;
@@ -84,7 +84,7 @@ footer p {
 .add-section * {
     z-index: 10;
     pointer-events: auto;
-} */
+}
 
 .modal-overlay {
     display: none;
@@ -180,7 +180,7 @@ footer p {
 }
 
 .card {
-    height: 300px;
+    height: 400px;
     width: 240px;
     border-style: outset;
     border-radius: 5%;

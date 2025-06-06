@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector("title").innerText === "Music Playlist Explorer") {
         //If document is the home page (index.html)...
         loadPlaylists(); 
+        document.getElementById('add-form').addEventListener('submit', handleAddSubmit);
     } else {
         //If document is the featured page (index.html)...
         loadFeaturedContent();
@@ -216,6 +217,38 @@ function handleEditSubmit(event) {
     playlistData[indexEdit] = currPlaylist;
     loadPlaylists();
     hideModal();
+}
+
+function handleAddSubmit(event) {
+    event.preventDefault();
+    const name = document.getElementById('new-name').value;
+    let img = document.getElementById('new-img').value;
+    img = "\""+ document.getElementById('new-img').value +"\"";
+	const author = document.getElementById('new-author').value;
+    const songTitle = document.getElementsByName('new-song-title')[0].value;
+    const songArtist = document.getElementsByName('new-song-artist')[0].value;
+
+    playlistData.push(
+        {
+            "playlistID": 0,
+            "playlist_name": name,
+            "playlist_author": author,
+            "playlist_art": img,
+            "like_count": 0,
+            "songs": [
+                {
+                "songID": 0,
+                "title": songTitle,
+                "artist": songArtist,
+                "album": "default",
+                "cover_art": "./assets/img/song.png",
+                "length": "4:18"
+                }
+            ]
+        }
+    );
+
+    loadPlaylists();
 }
 
 function shuffleSongs(shuffleBtn) {
