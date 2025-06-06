@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     loadPlaylists();
 });
 
-
 const modalOverlay = document.querySelector(".modal-overlay");
 const modalPopup = document.querySelector(".modal-popup");
 let currPlaylistId = null;
@@ -18,7 +17,6 @@ function loadPlaylists() {
         paragraphNotif.innerText = "No playlists added";
         paragraphNotif.className = "paragraph-notif";
         playlistCardsArea.appendChild(paragraphNotif);
-        console.log("No playlists added");
     } else {
         playlists.forEach( (playlist) => {
             const playlistCard = createPlaylistCard(playlist);
@@ -32,18 +30,18 @@ function createPlaylistCard(playlist) {
     playlistCard.className = "card";
     playlistCard.id = playlist.playlistID; 
     playlistCard.innerHTML = `
-        <img src=${playlist.playlist_art} alt="image of ${playlist.playlist_author}'s ${playlist.playlist_name}"/>
+        <img data-playlistId="${playlist.playlistID}" src=${playlist.playlist_art} alt="image of ${playlist.playlist_author}'s ${playlist.playlist_name}"/>
         <h3>${playlist.playlist_name}</h3>
         <p>${playlist.playlist_author}</p>
-        <svg width="20" height="20"><rect/></svg>
-    `
+        <div class="like-div">
+            <span class="like-btn" data-id="${playlist.playlistID}" data-liked="false"><i class="fa fa-2x fa-heart fa-heart-o"></i><p>${playlist.like_count}</p></span>  
+        </div>
+        `
     return playlistCard; 
 }
 
 function obtainPlaylistInfo() {
-
     currPlaylist = playlistData.find((playlist) => playlist.playlistID == currPlaylistId);
-    console.log(currPlaylist);
 }
 
 //want to make the below code cleaner and have more separation of concerns
@@ -53,29 +51,7 @@ function displayModal() {
     modalOverlay.style.display = "block";
     modalPopup.style.display = "block";
 
-
-
     const modalContent = document.querySelector(".modal-content");
-    // modalContent.innerHTML = `
-    //     <div class="playlist-info">
-    //         <img src=${currPlaylist.playlist_art} alt="image of ${currPlaylist.playlist_author}'s ${currPlaylist.playlist_name}"/> 
-    //         <section>
-    //             <h3>${currPlaylist.playlist_name}</h3>
-    //             <p>${currPlaylist.playlist_author}</p>
-    //         </section>
-    //     </div>
-    //     <div class="playlist-list">
-            // <div class="song-tile">
-            //     <img src="./assets/img/song.png" alt="image of music note"/>
-            //     <section>
-            //         <p class="song-title">Song Title</p>
-            //         <p>Artist Name</p>
-            //         <p>Album Name</p>
-            //     </section>
-            //     <p class="song-length">0:00</p>
-            // </div>
-    //     </div>
-    // `
     modalContent.innerHTML = `
         <div class="playlist-info">
             <img src=${currPlaylist.playlist_art} alt="image of ${currPlaylist.playlist_author}'s ${currPlaylist.playlist_name}"/> 
@@ -121,6 +97,32 @@ function hideModal() {
     modalPopup.style.display = "none";
 }
 
+function toggleLike(likeBtn) {
+    //Logic followed from lab 4:
+    const playlistId = likeBtn.getAttribute("data-id");
+    currPlaylistId = playlistId;
+	const isLiked = likeBtn.getAttribute('data-liked') === 'true';
+    obtainPlaylistInfo();
+    let likesCount = currPlaylist.like_count;
+    console.log(likesCount);
+
+    if (isLiked) {
+		likesCount -= 1;
+        likeBtn.querySelector("i").classList.add("fa-heart-o");
+		likeBtn.querySelector("p").innerText = likesCount;
+        currPlaylist.like_count = likesCount;
+		likeBtn.setAttribute('data-liked', 'false');
+	} else {
+		likesCount += 1;
+        console.log(likesCount);
+        likeBtn.querySelector("i").classList.remove("fa-heart-o");
+        likeBtn.querySelector("p").innerText = likesCount;
+        currPlaylist.like_count = likesCount;
+		likeBtn.setAttribute('data-liked', 'true');
+	}
+
+}
+
 
 
 window.addEventListener("click", function (event) {
@@ -131,6 +133,8 @@ window.addEventListener("click", function (event) {
         displayModal();
     }  else if (event.target.className === "modal-overlay") {
         hideModal();
+    } else if (event.target.className === "like-btn") {
+        toggleLike(event.target);
     }
 });
 
