@@ -3,7 +3,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector("title").innerText === "Music Playlist Explorer") {
         //If document is the home page (index.html)...
-        loadPlaylists();
+        loadPlaylists(); 
     } else {
         //If document is the featured page (index.html)...
         loadFeaturedContent();
@@ -24,9 +24,11 @@ window.addEventListener("click", function (event) {
         toggleLike(event.target);
     } else if (event.target.className === "delete-btn") {
         deletePlaylist(event.target);
+    } else if (event.target.className === "edit-btn") {
+        editPlaylist(event.target);
     } else if (event.target.className === "shuffle-btn") {
         shuffleSongs(event.target);
-    }
+    } 
 });
 
 const modalOverlay = document.querySelector(".modal-overlay");
@@ -70,6 +72,7 @@ function createPlaylistCard(playlist) {
         </div>
         <div class="modification-div">
             <button class="delete-btn" data-id="${playlist.playlistID}">Delete</button>
+            <button class="edit-btn" data-id="${playlist.playlistID}">Edit</button>
         </div>
         `
     return playlistCard; 
@@ -161,9 +164,58 @@ function deletePlaylist(deleteBtn) {
     const playlistId = deleteBtn.getAttribute("data-id");
     currPlaylistId = playlistId;
     
+    //delete in data file and reload playlists
     const indexRemove = playlistData.findIndex((playlist) => playlist.playlistID == currPlaylistId);
     playlistData.splice(indexRemove, 1);
     loadPlaylists();
+}
+
+function editPlaylist(editBtn) {
+    const playlistId = editBtn.getAttribute("data-id");
+    currPlaylistId = playlistId;
+    obtainPlaylistInfo()
+    displayEditModal();
+}
+
+
+function displayEditModal() {
+    modalOverlay.style.display = "block";
+    modalPopup.style.display = "block";
+
+    const modalContent = document.querySelector(".modal-content");
+    modalContent.innerHTML = `
+        <div class="playlist-info">
+            <form id="edit-form">
+                <label for="edit-name">Playlist name:</label>
+                <input type="text" id="edit-name" name="playlist_name" value="${currPlaylist.playlist_name}">
+                <label for="edit-author">Playlist author:</label>
+                <input type="text" id="edit-author" name="playlist_author" value="${currPlaylist.playlist_author}">
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        <div class="playlist-list">
+        </div>
+    `
+    document.getElementById('edit-form').addEventListener('submit', handleEditSubmit);
+    createSongsList();
+
+}
+
+function handleEditSubmit(event) {
+    event.preventDefault();
+    const name = document.getElementById('edit-name').value;
+	const author = document.getElementById('edit-author').value;
+
+    currPlaylist = {
+        ...currPlaylist,
+        "playlist_name": name,
+        "playlist_author": author,
+    };
+
+    const indexEdit = playlistData.findIndex((playlist) => playlist.playlistID == currPlaylistId);
+    playlistData[indexEdit] = currPlaylist;
+    loadPlaylists();
+    hideModal();
 }
 
 function shuffleSongs(shuffleBtn) {
