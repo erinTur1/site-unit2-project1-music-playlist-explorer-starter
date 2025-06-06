@@ -1,21 +1,47 @@
+
+//On load of either page
 document.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector("title").innerText === "Music Playlist Explorer") {
+        //If document is the home page (index.html)...
         loadPlaylists();
     } else {
+        //If document is the featured page (index.html)...
         console.log(playlistData);
         loadFeaturedContent();
     }
 });
 
+//Diferent functions are triggered depneding on which html element was clicked:
+/*Note: I hae done this method rather than dynamically add event listeners to evry new object.
+Is this method acceptable?*/
+window.addEventListener("click", function (event) {
+    if (event.target.className === "card") {
+        currPlaylistId = event.target.id;
+        obtainPlaylistInfo();
+        displayModal();
+    }  else if (event.target.className === "modal-overlay") { //grey area around modal was clicked
+        hideModal();
+    } else if (event.target.className === "like-btn") {
+        toggleLike(event.target);
+    } else if (event.target.className === "shuffle-btn") {
+        shuffleSongs(event.target);
+    }
+});
+
 const modalOverlay = document.querySelector(".modal-overlay");
 const modalPopup = document.querySelector(".modal-popup");
+/*The below two variables are changed to refer to the current playlist the user is interacting with
+either through liking or shuffling and are changed throughout.*/
 let currPlaylistId = null;
 let currPlaylist = null;
 
+//For home page load
 function loadPlaylists() {
     const playlists = playlistData;
     const playlistCardsArea = document.querySelector(".playlist-cards");
     if (playlists.length == 0) {
+        //paragraphNotif is a p tag dynamically loaded on the page to notify the user.
+        //in this case it is used to notify if there are no playlists to be displayed
         const paragraphNotif = document.createElement("p");
         paragraphNotif.innerText = "No playlists added";
         paragraphNotif.className = "paragraph-notif";
@@ -28,6 +54,7 @@ function loadPlaylists() {
     }
 }
 
+//creates html playlist card element given a playlist's info
 function createPlaylistCard(playlist) {
     const playlistCard = document.createElement('div');
     playlistCard.className = "card";
@@ -43,14 +70,13 @@ function createPlaylistCard(playlist) {
     return playlistCard; 
 }
 
+//function that sets the current playlist user is interacting with based on the playlist Id.
 function obtainPlaylistInfo() {
     currPlaylist = playlistData.find((playlist) => playlist.playlistID == currPlaylistId);
 }
 
-//want to make the below code cleaner and have more separation of concerns
-//make these toggles instead???
+//creates html modal element given a playlist's info
 function displayModal() {
-    // currCard.style.borderStyle = "inset"; //NEED TO FIX
     modalOverlay.style.display = "block";
     modalPopup.style.display = "block";
 
@@ -68,14 +94,9 @@ function displayModal() {
         </div>
     `
     createSongsList();
-    // currPlaylist.songs.forEach( (song) => {
-    //         const songTile = createSongTile(song);
-    //         songTilesArea = document.querySelector(".playlist-list");
-    //         songTilesArea.appendChild(songTile);
-    // });
-
 }
 
+//dynamically appends the song tiles to the "playlist-list" section. Used for both home and featured page
 function createSongsList() {
     currPlaylist.songs.forEach( (song) => {
             const songTile = createSongTile(song);
@@ -84,10 +105,10 @@ function createSongsList() {
     });
 }
 
+//creates html song tile element given a song's info
 function createSongTile(song) {
     const newSongTile = document.createElement('div');
     newSongTile.className = "song-tile";
-    // playlistCard.id = playlist.playlistID; 
     newSongTile.innerHTML = `
         <img src=${song.cover_art} alt="image of ${song.title}"/>
         <section>
@@ -101,7 +122,6 @@ function createSongTile(song) {
 }
 
 function hideModal() {
-    // currCard.style.borderStyle = "outset";
     modalOverlay.style.display = "none";
     modalPopup.style.display = "none";
 }
@@ -114,15 +134,17 @@ function toggleLike(likeBtn) {
     obtainPlaylistInfo();
     let likesCount = currPlaylist.like_count;
 
-    if (isLiked) {
+    if (isLiked) { //means clicking again will unlike it
 		likesCount -= 1;
-        likeBtn.querySelector("i").classList.add("fa-heart-o");
+        likeBtn.querySelector("i").classList.add("fa-heart-o"); //make heart outlined
+        //update like count in data file and on-page
 		likeBtn.querySelector("p").innerText = likesCount;
         currPlaylist.like_count = likesCount;
 		likeBtn.setAttribute('data-liked', 'false');
-	} else {
+	} else { //means clicking will like it
 		likesCount += 1;
-        likeBtn.querySelector("i").classList.remove("fa-heart-o");
+        likeBtn.querySelector("i").classList.remove("fa-heart-o"); //make heart filled in
+        //update like count in data file and on-page
         likeBtn.querySelector("p").innerText = likesCount;
         currPlaylist.like_count = likesCount;
 		likeBtn.setAttribute('data-liked', 'true');
@@ -145,44 +167,24 @@ function shuffleSongs(shuffleBtn) {
         songs[i] = temp;
     }
 
-    currPlaylist.songs = songs;
+    currPlaylist.songs = songs; //update songs in data file
     displayModal();
-
-
 }
 
-
-
-//ALTERNATE METHOD: 
-//after playlists load, call new function, addAllEventlisteners
-
-window.addEventListener("click", function (event) {
-    if (event.target.className === "card") {
-        currPlaylistId = event.target.id;
-        obtainPlaylistInfo();
-        displayModal();
-    }  else if (event.target.className === "modal-overlay") {
-        hideModal();
-    } else if (event.target.className === "like-btn") {
-        toggleLike(event.target);
-    } else if (event.target.className === "shuffle-btn") {
-        shuffleSongs(event.target);
-    }
-});
-
-
+//For featured page load
 function loadFeaturedContent() {
 
     const randIndex = Math.floor(Math.random() * playlistData.length);
     
     currPlaylist = playlistData[randIndex];
+    //left side includes playlist image and name
     const leftSide = document.querySelector(".playlist-label");
 
     leftSide.innerHTML = `
         <img src="${currPlaylist.playlist_art}" alt="image of ${currPlaylist.playlist_author}'s ${currPlaylist.playlist_name}"/>
         <h3>${currPlaylist.playlist_name}</h3>
     `
-
+    //will display all corresponding sont tiles on the right
     createSongsList();
 
 }

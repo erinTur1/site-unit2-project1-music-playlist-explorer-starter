@@ -2,15 +2,12 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    /* background-color: #f8f8f8; */
     background-color: #f79b9b;
 }
 
 
 header {
-    /* background-color: rgb(189, 188, 188); */
     background-color: #fe8282;
-    /* padding: 20px; */
     position: fixed;
     width: 100vw;
     z-index: 1;
@@ -61,8 +58,10 @@ footer {
     position: fixed;
     width: 100vw;
     bottom: 0;
-    /* background-color: rgb(189, 188, 188); */
     background-color: #fe8282;
+}
+footer p {
+    text-align: center;
 }
 
 .playlist-cards {
@@ -102,7 +101,6 @@ footer {
 }
 
 .modal-content {
-    /* background-color: #e4e0e0; */
     background-color: #f79b9b;
     border-style: outset;
     border-radius: 5%;
@@ -223,9 +221,7 @@ footer {
     
 }
 
-
-
-
+/*styling related to featured page specifically*/
 .featured-content {
     display: flex;
     flex-direction: row;
