@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector("title").innerText === "Music Playlist Explorer") {
         //If document is the home page (index.html)...
         loadPlaylists(); 
-        document.getElementById('add-form').addEventListener('submit', handleAddSubmit);
+        document.getElementById('add-songs-btn').addEventListener('click', handleAddSongs);
     } else {
         //If document is the featured page (index.html)...
         loadFeaturedContent();
@@ -219,36 +219,92 @@ function handleEditSubmit(event) {
     hideModal();
 }
 
-function handleAddSubmit(event) {
+function handleAddSubmitAll(event) {
     event.preventDefault();
     const name = document.getElementById('new-name').value;
     let img = document.getElementById('new-img').value;
+    const numSongs = document.getElementById('num-songs').value;
     img = "\""+ document.getElementById('new-img').value +"\"";
 	const author = document.getElementById('new-author').value;
-    const songTitle = document.getElementsByName('new-song-title')[0].value;
-    const songArtist = document.getElementsByName('new-song-artist')[0].value;
+
+    let songs = [];
+    for(let i = 1; i <= numSongs; i++) {
+        songs.push( {
+             "title": document.getElementById(`new-song-title-${i}`).value,
+            "artist": document.getElementById(`new-song-artist-${i}`).value,
+        })
+    }
 
     playlistData.push(
         {
-            "playlistID": 0,
+            "playlistID": getNewId(),
             "playlist_name": name,
             "playlist_author": author,
             "playlist_art": img,
             "like_count": 0,
-            "songs": [
-                {
-                "songID": 0,
-                "title": songTitle,
-                "artist": songArtist,
-                "album": "default",
-                "cover_art": "./assets/img/song.png",
-                "length": "4:18"
-                }
-            ]
+            "songs": songs.map((songObj) => {
+                return {
+                    "songID": getNewId(),
+                    "title": songObj.title,
+                    "artist": songObj.artist,
+                    "album": "-",
+                    "cover_art": "./assets/img/song.png",
+                    "length": "_"
+                };
+            })
         }
     );
 
+    document.getElementById('add-form').reset();
     loadPlaylists();
+    console.log(playlistData);
+}
+
+function handleAddSongs(event) {
+    event.preventDefault();
+    const numSongs = document.getElementById('num-songs').value;
+
+    addSongsForm(numSongs);
+    document.getElementById('add-form').addEventListener('submit', handleAddSubmitAll);
+}
+
+function addSongsForm(numSongs) {
+    const addForm = document.getElementById('add-form');
+    const innerDiv = document.createElement("div");
+    const br = document.createElement("br");
+
+    for (let i = 1; i <= numSongs; i++) {
+        let label = document.createElement("label");
+        label.for = "new-song-" + i;
+        label.innerText = ""
+
+        let inputTitle = document.createElement("input");
+        inputTitle.type = "text";
+        inputTitle.id = "new-song-title-" + i;
+        inputTitle.name = "new-song-title-" + i;
+
+        let inputArtist = document.createElement("input");
+        inputArtist.type = "text";
+        inputArtist.id = "new-song-artist-" + i;
+        inputArtist.name = "new-song-artist-" + i;
+
+        label.innerText = "Song " + i + " (Title, Artist)";
+
+        innerDiv.appendChild(label);
+        innerDiv.appendChild(inputTitle);
+        innerDiv.appendChild(inputArtist);
+        innerDiv.appendChild(br);
+    }
+
+    const submitAll = document.createElement("input");
+    submitAll.type = "submit";
+    submitAll.value = "Create Playlist";
+    submitAll.name = "action";
+
+    innerDiv.appendChild(submitAll);
+
+    addForm.appendChild(innerDiv);
+    
 }
 
 function shuffleSongs(shuffleBtn) {
@@ -286,5 +342,11 @@ function loadFeaturedContent() {
     //will display all corresponding sont tiles on the right
     createSongsList();
 
+}
+
+function getNewId() {
+    //https://stackoverflow.com/questions/8012002/create-a-unique-number-with-javascript-time
+    //"shortest way to create a very likely unique number"
+    return Date.now() + Math.random();
 }
 

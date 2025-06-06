@@ -4,7 +4,7 @@ let playlistData = [
       "playlist_name": "Late Night Drive",
       "playlist_author": "Melody Maven",
       "playlist_art": "https://picsum.photos/id/36/200",
-      "like_count": 0,
+      "like_count": 10,
       "songs": [
         {
           "songID": 0,
@@ -53,7 +53,7 @@ let playlistData = [
       "playlist_name": "That Summer '16 Feeling",
       "playlist_author": "Groove Guardian",
       "playlist_art": "https://picsum.photos/id/117/200",
-      "like_count": 0,
+      "like_count": 1,
       "songs": [
         {
           "songID": 5,
@@ -151,7 +151,7 @@ let playlistData = [
       "playlist_name": "Road Trip Anthems",
       "playlist_author": "Playlist Pioneer",
       "playlist_art": "https://picsum.photos/id/314/200",
-      "like_count": 0,
+      "like_count": 3,
       "songs": [
         {
           "songID": 15,
@@ -200,7 +200,7 @@ let playlistData = [
       "playlist_name": "Boss Chick Energy",
       "playlist_author": "Tempo Tactician",
       "playlist_art": "https://picsum.photos/id/449/200",
-      "like_count": 0,
+      "like_count": 40,
       "songs": [
         {
           "songID": 20,
@@ -249,7 +249,7 @@ let playlistData = [
       "playlist_name": "Rainy Nights",
       "playlist_author": "Sonic Sage",
       "playlist_art": "https://picsum.photos/id/115/200",
-      "like_count": 0,
+      "like_count": 20,
       "songs": [
         {
           "songID": 25,
@@ -298,7 +298,7 @@ let playlistData = [
       "playlist_name": "90's R&B",
       "playlist_author": "Vinyl Virtuoso",
       "playlist_art": "https://picsum.photos/id/815/200",
-      "like_count": 0,
+      "like_count": 6,
       "songs": [
         {
           "songID": 30,
@@ -347,7 +347,7 @@ let playlistData = [
       "playlist_name": "Nothing But The Classics",
       "playlist_author": "Echo Enthusiast",
       "playlist_art": "https://picsum.photos/id/22/200",
-      "like_count": 0,
+      "like_count": 5,
       "songs": [
         {
           "songID": 35,
