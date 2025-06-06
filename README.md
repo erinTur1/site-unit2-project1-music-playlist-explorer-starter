@@ -10,22 +10,22 @@ Deployed Application (**required**): [Music Playlist Explorer Deployed Site](ADD
 
 #### CORE FEATURES
 
-- [ ] **Display Playlists**
+- [X] **Display Playlists**
   - [X] Dynamically render playlists on the homepage using JavaScript.
     - [X] Playlists should be shown in grid view.
-    - [ ] Playlist images should be reasonably sized (at least 6 playlists on your laptop when full screen; large enough that the playlist components detailed in the next feature are legible).
+    - [X] Playlist images should be reasonably sized (at least 6 playlists on your laptop when full screen; large enough that the playlist components detailed in the next feature are legible).
   - [X] Fetch data from a provided Javascript file and use it to create interactive playlist tiles.
 
 - [X] **Playlist Components**
-  - [V] Each tile should display the playlist's:
+  - [X] Each tile should display the playlist's:
     - [X] Cover image
     - [X] Name
     - [X] Author
     - [X] Like count
 
-- [ ] **Playlist Details**
+- [X] **Playlist Details**
   - [X] Create a modal pop-up view that displays detailed information about a playlist when a user clicks on a playlist tile.
-  - [ ] The modal should show the playlist's:
+  - [X] The modal should show the playlist's:
     - [X] Cover image
     - [X] Name
     - [X] Author
@@ -39,7 +39,7 @@ Deployed Application (**required**): [Music Playlist Explorer Deployed Site](ADD
     - [X] Appear floating on the screen.
     - [X] The backdrop should appear darker or in a different shade.
 
-- [ ] **Like Playlists**
+- [X] **Like Playlists**
   - [X] Implement functionality to allow users to like playlists by clicking a heart icon on each playlist tile.
   - [X] When the heart icon is clicked:
     - [X] If previously unliked:
@@ -48,17 +48,17 @@ Deployed Application (**required**): [Music Playlist Explorer Deployed Site](ADD
     - [X] If previously liked:
       - [X] The like count on the playlist tile should decrease by 1.
       - [X] There should be visual feedback (such as the heart turning a different color) to show that the playlist has been unliked by the user.
-    - [ ] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS:** In addition to showcasing the above features, for ease of grading, please film yourself liking and unliking:
-      - [ ] a playlist with a like count of 0
-      - [ ] a playlist with a non-zero like count
+    - [X] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS:** In addition to showcasing the above features, for ease of grading, please film yourself liking and unliking:
+      - [X] a playlist with a like count of 0
+      - [X] a playlist with a non-zero like count
 
-- [ ] **Shuffle Songs**
+- [X] **Shuffle Songs**
   - [X] Enable users to shuffle the songs within a playlist using a shuffle button in the playlist's detail modal.
   - [X] When the shuffle button is clicked, the playlist's songs should display in a different order.
-  - [ ] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS:** In addition to showcasing the above features, for ease of grading, please show yourself shuffling the same playlist more than once. 
+  - [X] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS:** In addition to showcasing the above features, for ease of grading, please show yourself shuffling the same playlist more than once. 
   
-- [ ] **Featured Page**
-  - [ ] Application includes a dedicated page that randomly selects and displays a playlist, showing the playlist’s:
+- [X] **Featured Page**
+  - [X] Application includes a dedicated page that randomly selects and displays a playlist, showing the playlist’s:
     - [X] Playlist Image
     - [X] Playlist Name
     - [X] List of songs, including each song's:
@@ -68,12 +68,12 @@ Deployed Application (**required**): [Music Playlist Explorer Deployed Site](ADD
   - [X] When the page is refreshed or reloaded, a new random playlist is displayed
     - For example, navigating to the all playlists page and then back to the featured playlist page should result in a new random playlist being displayed
     - Note that because your algorithm will not be truly random, it is possible that the same playlist will feature twice in a row. 
-    - [ ] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS:** In addition to showcasing the above features, for ease of grading, please show yourself refreshing the featured page more than once. 
+    - [X] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS:** In addition to showcasing the above features, for ease of grading, please show yourself refreshing the featured page more than once. 
   - [X] Application includes a navigation bar or some other mechanism such that users can navigate to the page with all playlists from the featured page and vice versa without using the browser's back and forward buttons. 
 
 #### STRETCH FEATURES
 
-- [ ] **Add New Playlists**
+- [X] **Add New Playlists**
   - [X] Allow users to create new playlists.
   - [X] Using a form, users can input playlist:
     - [X] Name
@@ -83,9 +83,9 @@ Deployed Application (**required**): [Music Playlist Explorer Deployed Site](ADD
       - [X] Title
       - [X] Artist
   - [X] The resulting playlist should display in the grid view.
-  - [ ] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS:** For ease of grading, please show yourself adding at least two songs to the playlist. 
+  - [X] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS:** For ease of grading, please show yourself adding at least two songs to the playlist. 
 
-- [ ] **Edit Existing Playlists**
+- [PARTIAL] **Edit Existing Playlists**
   - [X] Enable users to modify the details of existing playlists.
   - [X] Add an edit button to each playlist tile.
   - [ ] Users can update the playlist:
@@ -95,7 +95,7 @@ Deployed Application (**required**): [Music Playlist Explorer Deployed Site](ADD
   - [X] The playlist grid view and playlist detail modal should update to display any changes (see Required Features, Criterion 1 & 2).
   - [ ] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS:** For ease of grading, please show yourself:
     - [ ] Editing all of a playlist's features (name, creator, AND songs)
-    - [ ] Editing some of a playlist's features (name, creator, OR songs) 
+    - [X] Editing some of a playlist's features (name, creator, OR songs) 
 
 - [X] **Delete Playlists**
   - [X] Add a delete button to each playlist tile within the grid view.
@@ -132,21 +132,30 @@ Deployed Application (**required**): [Music Playlist Explorer Deployed Site](ADD
 
 `TODO://` Add the embedded URL code to your animated app walkthrough below, `ADD_EMBEDDED_CODE_HERE`. Make sure the video actually renders and is playable when viewing this README. Ensure your walkthrough showcases the presence and/or functionality of all features you implemented above (check them off as you film!). Pay attention to any **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS** checkboxes listed above to ensure graders see the full functionality of your website! (🚫 Remove this paragraph after adding walkthrough video)
 
-`ADD_EMBEDDED_CODE_HERE`
+<div style="position: relative; padding-bottom: 56.25%; height: 0;"><iframe src="https://www.loom.com/embed/a586bf4c8d1947d5af066813f3f2049c?sid=e949334b-ffe4-406b-a5a8-27145d76d440" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+
+
+Link to video:
+
+https://www.loom.com/share/a586bf4c8d1947d5af066813f3f2049c?sid=81a761c8-b95c-44ba-aa25-25fcf73661e4
 
 ### Reflection
 
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
 
-Add your response here
+I felt that the core concepts needed to complete the project were available in the labs. If anything wasn't explicity stated it wasn't too difficuult to do my own research
+on how to complete the task
 
 * If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
   
-Add your response here
+If I had more time, I would've definitely completed all of the stretch features to the best of my ability. Also, I would have taken the time to see research if my initial approach to
+problems is correct. Because of the time crunch near the end, I had to approach the stretch features through thinking of workarounds and alternatives solely based on what I already knew. 
+If I had more time, I could have researched and/or asked my fellow interns about other approaches and the implications of them.
 
 * Reflect on your project demo, what went well? Were there things that maybe didn't go as planned? Did you notice something that your peer did that you would like to try next time?
 
-Add your response here
+I think I underestimated the amount of time one feature would take, so I didn't prioritize tasks as effectively as I could have this week. Luckily I got to try out and successfully 
+complete a range of stretch features, but I feel that now I have got more practice with delivering well AND delivering fast, i will be more prepared next week.
 
 ### Open-source libraries used
 
@@ -157,3 +166,5 @@ https://fontawesome.com/
 ### Shout out
 
 Give a shout out to somebody from your cohort that especially helped you during your project. This can be a fellow peer, instructor, TA, mentor, etc.
+
+Terrence Butler, my peer mentor, has been extremely helpful in helping me approach problems from new perspectives.
