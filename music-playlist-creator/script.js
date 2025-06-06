@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
         loadPlaylists();
     } else {
         //If document is the featured page (index.html)...
-        console.log(playlistData);
         loadFeaturedContent();
     }
 });
@@ -23,6 +22,8 @@ window.addEventListener("click", function (event) {
         hideModal();
     } else if (event.target.className === "like-btn") {
         toggleLike(event.target);
+    } else if (event.target.className === "delete-btn") {
+        deletePlaylist(event.target);
     } else if (event.target.className === "shuffle-btn") {
         shuffleSongs(event.target);
     }
@@ -37,8 +38,9 @@ let currPlaylist = null;
 
 //For home page load
 function loadPlaylists() {
-    const playlists = playlistData;
+    let playlists = playlistData;
     const playlistCardsArea = document.querySelector(".playlist-cards");
+    playlistCardsArea.innerHTML = ''; //necessary if page is reloaded due to deletion
     if (playlists.length == 0) {
         //paragraphNotif is a p tag dynamically loaded on the page to notify the user.
         //in this case it is used to notify if there are no playlists to be displayed
@@ -65,6 +67,9 @@ function createPlaylistCard(playlist) {
         <p>${playlist.playlist_author}</p>
         <div class="like-div">
             <span class="like-btn" data-id="${playlist.playlistID}" data-liked="false"><i class="fa fa-2x fa-heart fa-heart-o"></i><p>${playlist.like_count}</p></span>  
+        </div>
+        <div class="modification-div">
+            <button class="delete-btn" data-id="${playlist.playlistID}">Delete</button>
         </div>
         `
     return playlistCard; 
@@ -150,6 +155,15 @@ function toggleLike(likeBtn) {
 		likeBtn.setAttribute('data-liked', 'true');
 	}
 
+}
+
+function deletePlaylist(deleteBtn) {
+    const playlistId = deleteBtn.getAttribute("data-id");
+    currPlaylistId = playlistId;
+    
+    const indexRemove = playlistData.findIndex((playlist) => playlist.playlistID == currPlaylistId);
+    playlistData.splice(indexRemove, 1);
+    loadPlaylists();
 }
 
 function shuffleSongs(shuffleBtn) {

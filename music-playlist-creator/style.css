@@ -218,7 +218,14 @@ footer p {
 }
 .card > p {
     margin: 5px 7px;
-    
+}
+
+.card .delete-btn {
+    pointer-events: auto;
+}
+
+.card .edit-btn {
+    pointer-events: auto;
 }
 
 /*styling related to featured page specifically*/
