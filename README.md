@@ -4,7 +4,7 @@ Submitted by: Erin Turgut
 
 Estimated time spent: 24 hours spent in total
 
-Deployed Application (**required**): [Music Playlist Explorer Deployed Site](ADD_LINK_HERE)
+Deployed Application (**required**): [Music Playlist Explorer Deployed Site]https://site-unit2-project1-music-playlist-ah8f.onrender.com/
 
 ### Application Features
 
@@ -129,8 +129,6 @@ Deployed Application (**required**): [Music Playlist Explorer Deployed Site](ADD
   - [ ] Selecting a sort option should result in a reordering based on the selected sort while maintaining a grid view.
 
 ### Walkthrough Video
-
-`TODO://` Add the embedded URL code to your animated app walkthrough below, `ADD_EMBEDDED_CODE_HERE`. Make sure the video actually renders and is playable when viewing this README. Ensure your walkthrough showcases the presence and/or functionality of all features you implemented above (check them off as you film!). Pay attention to any **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS** checkboxes listed above to ensure graders see the full functionality of your website! (🚫 Remove this paragraph after adding walkthrough video)
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0;"><iframe src="https://www.loom.com/embed/a586bf4c8d1947d5af066813f3f2049c?sid=e949334b-ffe4-406b-a5a8-27145d76d440" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
 
